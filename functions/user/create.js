@@ -20,7 +20,6 @@ module.exports.createUser = async (event, context) => {
 
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(body.password, salt);
-  console.log(hash, salt);
 
   const user = await prisma.user.create({
     data: {

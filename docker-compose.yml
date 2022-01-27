@@ -1,0 +1,61 @@
+version: "3" ## especifica a versão do docker-compose file
+
+services: ## Define um serviço
+  # dbPostegres:
+  #   image: postgres:latest
+  #   container_name: "postgres-tepre"
+  #   environment:
+  #     - POSTGRES_DB=medicalApply
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=123456
+  #   volumes:
+  #     - "./data/postgres:/var/lib/docker/postgresql/data"
+  #   networks:
+  #     backend:
+  #       ipv4_address: 172.21.0.3
+  #   ports:
+  #     - 5432:5432
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 4096M
+  #         cpus: '1.5'
+  #       reservations:
+  #         memory: 2048M
+
+  redis:
+    image: redis
+    command: redis-server
+    # --requirepass Redis2019!
+    networks:
+      backend:
+        ipv4_address: 172.23.0.2
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+          cpus: '1.5'
+        reservations:
+          memory: 1024MB
+
+  mysqlsrv:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "lambda"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./data/mysql:/var/lib/docker/mysqlql/data"
+    networks:
+      backend:
+        ipv4_address: 172.23.0.4
+
+networks:
+  backend:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.23.0.0/16

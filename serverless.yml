@@ -39,3 +39,12 @@ functions:
           path: /version
           method: get
           cors: true
+
+  getUser:
+    handler: functions/user/get.getUser
+    description: "User get Route"
+    events:
+      - http:
+          path: /user
+          method: get
+          cors: true

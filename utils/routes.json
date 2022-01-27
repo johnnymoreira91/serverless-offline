@@ -1,3 +1,4 @@
 {
-  "/user GET": null
+  "/user GET": null,
+  "/user POST": null
 }

@@ -1,9 +1,10 @@
+const routes = require('../utils/routes.json');
+
 module.exports.home = async () => ({
   statusCode: 200,
   body: JSON.stringify(
     {
-      message: 'Home Page, Chosse What to do',
-      // input: event,
+      routes,
     },
     null,
     2,

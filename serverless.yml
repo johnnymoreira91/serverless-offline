@@ -48,3 +48,12 @@ functions:
           path: /user
           method: get
           cors: true
+
+  createUser:
+    handler: functions/user/create.createUser
+    description: "User get Route"
+    events:
+      - http:
+          path: /user
+          method: post
+          cors: true

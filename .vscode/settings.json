@@ -28,7 +28,6 @@
   "explorer.confirmDelete": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "git.enableSmartCommit": true,
-  "workbench.colorTheme": "Material Theme Palenight High Contrast",
   "workbench.iconTheme": "material-icon-theme",
   "pug2html.compileOptions": {
     "doctype": "html",
@@ -39,7 +38,6 @@
   "breadcrumbs.enabled": true,
   "markdown.preview.breaks": true,
   "npm.autoDetect": "off",
-  "eslint.autoFixOnSave": true,
   "editor.fontLigatures": true,
   "vsicons.projectDetection.autoReload": true,
   "files.autoSave": "off",

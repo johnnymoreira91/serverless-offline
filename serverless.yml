@@ -8,6 +8,9 @@ provider:
   region: eu-west-1
   lambdaHashingVersion: 20201221
   stage: dev
+  environment: 
+    APP_STAGE: ${self:process.env.APP_STAGE}
+    REDIS_SRV: ${self:process.env.REDIS_SRV}
 
 plugins:
   - serverless-offline
@@ -38,6 +41,15 @@ functions:
       - http:
           path: /version
           method: get
+          cors: true
+
+  doLogin:
+    handler: functions/login/doLogin.doLogin
+    description: "do login"
+    events:
+      - http:
+          path: /login
+          method: post
           cors: true
 
   getUser:

@@ -1,4 +1,4 @@
-const version = require('../version');
+/* eslint-disable no-undef */
 const pkVersion = require('../../package.json').version;
 
 test('Get Version', async () => {

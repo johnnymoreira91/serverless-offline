@@ -5,7 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "test": "jest",
-    "debug": "AWS_REGION=us-east-1 nodemon -e js  --exec serverless offline start --noPrependStageInUrl"
+    "debug": "AWS_REGION=us-east-1 APP_STAGE=dev nodemon -e js  --exec serverless offline start --noPrependStageInUrl"
   },
   "keywords": [],
   "author": "",
@@ -13,13 +13,16 @@
   "dependencies": {
     "@prisma/client": "^3.8.1",
     "aws-sdk": "^2.874.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "dotenv": "^14.3.2",
     "express": "^4.17.1",
     "http-errors": "^2.0.0",
     "jest": "^27.4.7",
     "jsonwebtoken": "^8.5.1",
     "serverless-http": "^2.7.0",
-    "slspress": "^2.2.5"
+    "slspress": "^2.2.5",
+    "store": "^2.0.12"
   },
   "devDependencies": {
     "eslint": "^8.7.0",

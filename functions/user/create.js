@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const httpError = require('http-errors');
+const bcrypt = require('bcrypt');
 const prisma = require('../../prisma/index');
 
 module.exports.createUser = async (event, context) => {
@@ -11,18 +12,22 @@ module.exports.createUser = async (event, context) => {
   });
 
   if (email != null) {
-    const err = httpError.Forbidden('Email already exist');
+    const err = httpError.Conflict('Email already exist');
     return {
       body: JSON.stringify(err.message),
     };
   }
+
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(body.password, salt);
+  console.log(hash, salt);
 
   const user = await prisma.user.create({
     data: {
       name: body.name,
       superUser: body.superUser,
       email: body.email,
-      password: body.password,
+      password: hash,
     },
   });
 

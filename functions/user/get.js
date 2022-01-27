@@ -9,9 +9,7 @@ module.exports.getUser = async (event) => {
       body: JSON.stringify(
         {
           user
-        },
-        null,
-        2
+        }
       ),
     };
 };

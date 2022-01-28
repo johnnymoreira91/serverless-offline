@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const utils = require('../lib/utils');
 
 const authorizeUser = (userScopes, methodArn) => {
-  console.log(userScopes, 'entrou no auth');
   const hasValidScope = _.some(userScopes, (scope) => _.endsWith(methodArn, scope));
   return hasValidScope;
 };
@@ -25,7 +24,6 @@ module.exports.handler = (event, context, callback) => {
 
     // Checks if the user's scopes allow her to call the current function
     const isAllowed = authorizeUser(event.resource, event.methodArn);
-    console.log(isAllowed, 'if is allow ');
 
     const effect = isAllowed ? 'Allow' : 'Deny';
     const userId = user.login;

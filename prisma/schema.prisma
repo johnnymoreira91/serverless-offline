@@ -11,15 +11,29 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  uuid      String   @unique @default(uuid())
-  superUser Boolean  @default(false)
-  email     String   @unique @db.VarChar(100)
-  password  String   @default("123456") @db.VarChar(100)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int        @id @default(autoincrement())
+  name       String
+  uuid       String     @unique @default(uuid())
+  superUser  Boolean    @default(false)
+  email      String     @unique @db.VarChar(100)
+  password   String     @default("123456") @db.VarChar(100)
+  permission String
+  Permission Permission @relation(fields: [permission], references: [permissionName])
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
   @@index([name, uuid])
   @@map("users")
+}
+
+model Permission {
+  id              Int      @id @default(autoincrement())
+  permissionName  String
+  permissionLevel Int
+  User            User[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([permissionName])
+  @@map("permissions")
 }

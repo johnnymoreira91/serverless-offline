@@ -21,12 +21,28 @@ module.exports.createUser = async (event, context) => {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(body.password, salt);
 
+  const findPermission = await prisma.permission.findFirst({
+    where: { permissionName: body.permission },
+  });
+
+  if (findPermission == null) {
+    const err = httpError.BadRequest('Permission doenst exist');
+    return {
+      body: JSON.stringify(err.message),
+    };
+  }
+
   const user = await prisma.user.create({
     data: {
       name: body.name,
       superUser: body.superUser,
       email: body.email,
       password: hash,
+      Permission: {
+        connect: {
+          id: findPermission.id,
+        },
+      },
     },
   });
 

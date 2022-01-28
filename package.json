@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "jest",
-    "debug": "AWS_REGION=us-east-1 APP_STAGE=dev nodemon -e js  --exec serverless offline start --noPrependStageInUrl"
+    "debug": "AWS_REGION=us-east-1 APP_STAGE=dev nodemon -e js  --exec serverless offline start --noPrependStageInUrl",
+    "lint": "eslint . --ext js"
   },
   "keywords": [],
   "author": "",

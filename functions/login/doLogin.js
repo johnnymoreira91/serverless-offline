@@ -13,26 +13,21 @@ module.exports.doLogin = async (event) => {
     const login = await prisma.user.findFirst({
       where: { email },
     });
-    console.log(login);
+
     const hash = bcrypt.hashSync(password, login.password);
-    console.log(hash, 'hash');
+
     if (hash === login.password) {
-      console.log('entrou no if');
       const accessToken = jwt.sign(
         { login: login.id },
         process.env.SECRET,
         { expiresIn: 86400 },
       );
 
-      console.log(accessToken, 'token');
-
-      // const user = await prisma.user.findFirst({
-      //   where: { loginId: Number(login.id) },
-      // });
-
       login.password = undefined;
 
       store.set('user', login);
+      const us = store.get('user');
+      console.log(us);
       return {
         statusCode: 200,
         body: JSON.stringify(

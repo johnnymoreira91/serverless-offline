@@ -12,6 +12,25 @@ provider:
     APP_STAGE: ${self:process.env.APP_STAGE}
     REDIS_SRV: ${self:process.env.REDIS_SRV}
 
+iamRoleStatements:
+  - Effect: "Allow"
+    Action:
+      - iot:Publish
+      - events:PutRule
+      - events:PutTargets
+      - events:PutEvents
+      - events:DeleteRule
+      - events:RemoveTargets
+      - ecs:RunTask
+      - ecs:ListTasks
+      - ecs:DescribeTasks
+      - iam:PassRole
+      - lambda:AddPermission
+      - lambda:GetPolicy
+    Resource:
+      - "*"
+
+
 plugins:
   - serverless-offline
   
@@ -63,7 +82,7 @@ functions:
           path: /user
           method: get
           cors: true
-          # authorizer: authorize
+          authorizer: authorize
 
   createUser:
     handler: functions/user/create.createUser
